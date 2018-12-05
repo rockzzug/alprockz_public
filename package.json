@@ -1,0 +1,33 @@
+{
+  "name": "alprockz-smartcontract",
+  "version": "1.0.0",
+  "description": "Check README.md",
+  "main": "truffle.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "solhint contracts/*",
+    "test": "truffle test",
+    "flat": "truffle-flattener ./contracts/AlprockzToken.sol > ./flatted/AlprockzTokenFlat.sol",
+    "coverage": "./node_modules/.bin/solidity-coverage",
+    "all": "npm run lint && npm run test && npm run coverage && npm run flat",
+    "build": "npm run flat && solc --optimize --optimize-runs 200 --overwrite --abi --bin ./flatted/AlprockzTokenFlat.sol -o build/solc",
+    "build_for_deploy": "rm -f ./AlprockzTokenFlat.sol && npm run all && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://TAABLKA2@git.swisscom.ch/scm/scbc/alprockz-smartcontract.git"
+  },
+  "keywords": [],
+  "author": "Swisscom Blockchain AG",
+  "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "1.12.0",
+    "truffle-privatekey-provider": "^1.0.0"
+  },
+  "devDependencies": {
+    "solidity-coverage": "^0.5.11"
+  }
+}
